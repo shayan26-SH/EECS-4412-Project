@@ -32,7 +32,7 @@ The project will apply several data-mining and statistical techniques, including
 - Dylan Smith
 - Hanifah Lameed
 
-Student IDs, eClass emails, contribution statements, and signatures are included in the official course report.
+
 
 ---
 
