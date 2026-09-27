@@ -411,25 +411,21 @@ task6_data.columns = [
 ]
 
 
-# ------------------------------------------------------------
-# IMPORTANT:
-# Replace HANIFAH_ID with Hanifah's actual student ID.
-# ------------------------------------------------------------
+# ============================================================
+# CREATE TASK 6 CSV FILE
+# ============================================================
 
 csv_filename = (
-    "217761263-217285287-HANIFAH_ID--T1.csv"
+    "Shayan-Rabiee-Dylan-Smith-Hanifah-Lameed--T1.csv"
 )
-
 
 task6_data.to_csv(
     csv_filename,
     index=False
 )
 
-
 print("\nCSV file successfully created:")
 print(csv_filename)
-
 
 # ============================================================
 # FINAL SUMMARY
