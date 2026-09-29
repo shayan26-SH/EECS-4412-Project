@@ -55,6 +55,11 @@ Official documentation:
 
 https://nhts.ornl.gov/documentation
 
+Official CodeBook:
+
+https://nhts.ornl.gov/media/2017/doc/codebook_v1.2.pdf
+- used heavily 
+
 The NHTS provides information about daily travel behaviour in the United States, including:
 
 - Household demographics
