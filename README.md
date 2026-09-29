@@ -1,5 +1,6 @@
 # EECS 4412 Data Mining Project
 
+
 ## Analysis of Household Characteristics, Vehicle Availability, and Travel Behaviour
 
 ## Project Overview
@@ -77,3 +78,7 @@ The project currently uses the following three NHTS CSV files:
 hhpub_202609201846.csv
 vehpub_202609201846.csv
 trippub_202609201847.csv
+
+# Setup
+
+Use python -m pip install -r requirements.txt for all needed packages
