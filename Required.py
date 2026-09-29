@@ -74,6 +74,8 @@ trip["TRPTRANS_NUM"] = pd.to_numeric(
 )
 
 # Official 2017 NHTS transportation-mode codes
+#all pulled from codebook
+#codebook: https://nhts.ornl.gov/media/2017/doc/codebook_v1.2.pdf
 transport_labels = {
     1: "Walk",
     2: "Bicycle",
@@ -158,6 +160,10 @@ household["HHFAMINC_NUM"] = pd.to_numeric(
 )
 
 # Official HHFAMINC income categories
+# -9: Not ascertained
+# -8: Refused
+# -7: Don't know
+# These were left out
 income_labels = {
     1: "Less than $10,000",
     2: "$10,000-$14,999",
@@ -298,7 +304,8 @@ plt.close()
 # ANNMILES - BOX PLOT
 # Annual Vehicle Mileage
 # ============================================================
-
+# 25.9% of vehicles records had no annual mileage data.
+# leaving only 189,804 valid records. Mentioned on 4.6.4
 print("Creating Visualization 4...")
 
 vehicle["ANNMILES_NUM"] = pd.to_numeric(
