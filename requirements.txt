@@ -1,2 +1,4 @@
 pandas
 matplotlib
+xlsxwriter+
+flake8 pandas matplotlib
