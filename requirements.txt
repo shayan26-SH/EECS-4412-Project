@@ -1,4 +1,5 @@
 pandas
 matplotlib
-xlsxwriter+
-flake8 pandas matplotlib
+xlsxwriter
+flake8
+openpyxl
