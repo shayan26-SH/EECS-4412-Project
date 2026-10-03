@@ -521,9 +521,11 @@ try:
     # Interval dimension
     # --------------------------------------------------------
     tdaydate_sheet = pd.DataFrame({
-        "TDAYDATE":
+        "TDAYDATE": (
             travel_year.astype(str) +
             travel_month.astype(str).str.zfill(2)
+        ),
+        "Month_Index": month_index
     })
 
     write_sheet(workbook, "TDAYDATE", tdaydate_sheet)
