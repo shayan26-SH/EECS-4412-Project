@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import xlsxwriter
 
 
 # ============================================================
@@ -27,6 +28,10 @@ trip = pd.read_csv(
     "trippub_202609201847.csv",
     low_memory=False
 )
+
+household_columns = household.columns.tolist()
+vehicle_columns = vehicle.columns.tolist()
+trip_columns = trip.columns.tolist()
 
 
 print("======================================")
@@ -437,38 +442,56 @@ print("CREATING TASK 7 EXCEL WORKBOOK")
 print("======================================")
 
 workbook_name = "workbook217761263-217285287-219714815.xlsx"
+workbook_path = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    workbook_name
+)
 
-with pd.ExcelWriter(workbook_name, engine="xlsxwriter") as writer:
+def write_sheet(workbook, sheet_name, dataframe):
+    worksheet = workbook.add_worksheet(sheet_name)
+    worksheet.write_row(0, 0, dataframe.columns.tolist())
 
+    for row_number, row in enumerate(
+        dataframe.itertuples(index=False, name=None),
+        start=1
+    ):
+        worksheet.write_row(
+            row_number,
+            0,
+            [
+                value.item() if hasattr(value, "item") else value
+                for value in row
+            ]
+        )
+
+
+workbook = xlsxwriter.Workbook(
+    workbook_path,
+    {
+        "constant_memory": True,
+        "strings_to_formulas": False,
+        "strings_to_urls": False
+    }
+)
+
+try:
     # --------------------------------------------------------
     # SHEET 1: HOUSEHOLD
     # Complete household dataset
     # --------------------------------------------------------
-    household.to_excel(
-        writer,
-        sheet_name="Household",
-        index=False
-    )
+    write_sheet(workbook, "Household", household[household_columns])
 
     # --------------------------------------------------------
     # SHEET 2: VEHICLE
     # Complete vehicle dataset
     # --------------------------------------------------------
-    vehicle.to_excel(
-        writer,
-        sheet_name="Vehicle",
-        index=False
-    )
+    write_sheet(workbook, "Vehicle", vehicle[vehicle_columns])
 
     # --------------------------------------------------------
     # SHEET 3: TRIP
     # Complete trip dataset
     # --------------------------------------------------------
-    trip.to_excel(
-        writer,
-        sheet_name="Trip",
-        index=False
-    )
+    write_sheet(workbook, "Trip", trip[trip_columns])
 
     # --------------------------------------------------------
     # SHEET 4: TRPTRANS
@@ -480,11 +503,7 @@ with pd.ExcelWriter(workbook_name, engine="xlsxwriter") as writer:
             trip_transport["Transportation_Mode"]
     })
 
-    trptrans_sheet.to_excel(
-        writer,
-        sheet_name="TRPTRANS",
-        index=False
-    )
+    write_sheet(workbook, "TRPTRANS", trptrans_sheet)
 
     # --------------------------------------------------------
     # SHEET 5: HHFAMINC
@@ -495,11 +514,7 @@ with pd.ExcelWriter(workbook_name, engine="xlsxwriter") as writer:
         "Income_Category": income.map(income_labels)
     })
 
-    hhfaminc_sheet.to_excel(
-        writer,
-        sheet_name="HHFAMINC",
-        index=False
-    )
+    write_sheet(workbook, "HHFAMINC", hhfaminc_sheet)
 
     # --------------------------------------------------------
     # SHEET 6: TDAYDATE
@@ -511,11 +526,7 @@ with pd.ExcelWriter(workbook_name, engine="xlsxwriter") as writer:
             travel_month.astype(str).str.zfill(2)
     })
 
-    tdaydate_sheet.to_excel(
-        writer,
-        sheet_name="TDAYDATE",
-        index=False
-    )
+    write_sheet(workbook, "TDAYDATE", tdaydate_sheet)
 
     # --------------------------------------------------------
     # SHEET 7: TRPMILES
@@ -525,15 +536,13 @@ with pd.ExcelWriter(workbook_name, engine="xlsxwriter") as writer:
         "TRPMILES": trip_miles
     })
 
-    trpmiles_sheet.to_excel(
-        writer,
-        sheet_name="TRPMILES",
-        index=False
-    )
+    write_sheet(workbook, "TRPMILES", trpmiles_sheet)
+finally:
+    workbook.close()
 
 
 print("\nExcel workbook successfully created:")
-print(workbook_name)
+print(workbook_path)
 
 print("\n======================================")
 print("TASK 6 COMPLETE")
