@@ -3,3 +3,4 @@ matplotlib
 xlsxwriter
 flake8
 openpyxl
+scikit
