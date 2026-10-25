@@ -27,6 +27,8 @@ folds = StratifiedKFold(
     random_state=42,
 )
 
+validation_accuracies = []
+
 for fold_number, (train_rows, validation_rows) in enumerate(
     folds.split(train_data, train_data["VEHICLE_CLASS"]),
     start=1,
@@ -49,6 +51,7 @@ for fold_number, (train_rows, validation_rows) in enumerate(
     tree = DecisionTreeClassifier(
         criterion="gini",
         random_state=42,
+        max_depth=10,
     )
 
     # Train the tree.
@@ -79,8 +82,18 @@ for fold_number, (train_rows, validation_rows) in enumerate(
 
     # Compare predictions with the correct answers.
     accuracy = accuracy_score(y_validation, predictions)
-
+    validation_accuracies.append(accuracy)
     print(f"Fold {fold_number} validation accuracy: {accuracy:.2%}")
+
+    train_predictions = tree.predict(X_train)
+    train_accuracy = accuracy_score(y_train, train_predictions)
+
+    print(
+        f"Fold {fold_number}: "
+        f"training={train_accuracy:.2%}, "
+        f"validation={accuracy:.2%}"
+    )
+
 
     print(f"Fold {fold_number}: tree trained")
 
@@ -91,7 +104,8 @@ for fold_number, (train_rows, validation_rows) in enumerate(
     )
     print(f"tree depth: {tree.get_depth()}")
 
-
+mean_accuracy = sum(validation_accuracies) / len(validation_accuracies)
+print(f"Mean 5-fold validation accuracy: {mean_accuracy:.2%}")
 
 #plot the tree
 plt.figure(figsize=(20, 10))
