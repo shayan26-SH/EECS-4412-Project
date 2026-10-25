@@ -40,3 +40,6 @@ data = data.dropna(subset=PREDICTORS).copy()
 
 print("Households removed:", rows_before - len(data))
 print("Households remaining:", len(data))
+
+# save the data to a new csv file
+data.to_csv("task2_split_data.csv", index=False)
