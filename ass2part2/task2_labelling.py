@@ -21,3 +21,6 @@ data["VEHICLE_CLASS"] = vehicle_count.clip(upper=3).map({
 })
 print("households in each class:")
 print(data["VEHICLE_CLASS"].value_counts().sort_index())
+
+output_path = PROJECT_DIR / "task2_labelled_data.csv"
+data.to_csv(output_path, index=False)
