@@ -25,3 +25,8 @@ train_data, test_data = train_test_split(
 
 test_data.to_csv(SCRIPT_DIR / "task2_test.csv", index=False)
 train_data.to_csv(SCRIPT_DIR / "task2_train.csv", index=False)
+print("test data saved to task2_test.csv", len(test_data))
+print("train data saved to task2_train.csv", len(train_data))
+#test data saved to task2_test.csv 25060
+#train data saved to task2_train.csv 100238
+#
