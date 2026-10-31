@@ -7,7 +7,7 @@ from pathlib import Path
 import pickle
 import matplotlib.pyplot as plt
 from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, roc_curve, auc
 
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
@@ -112,6 +112,55 @@ fig.tight_layout()
 # Save an image for the report.
 fig.savefig(
     SCRIPT_DIR / "task2_confusion_matrix.png",
+    dpi=300,
+    bbox_inches="tight",
+)
+
+plt.show()
+
+probabilities = tree.predict_proba(X_test)
+
+print("\nClass probabilities for the first five households:")
+print(
+    pd.DataFrame(
+        probabilities[:5],
+        columns=tree.classes_,
+    )
+)
+
+
+# ROC curve
+# one vehicle vs rest
+
+
+plt.figure(figsize=(8, 6))
+for column, positive_class in enumerate(tree.classes_):
+    # Current class versus all other classes.
+    binary_y_test = (y_test == positive_class).astype(int)
+
+    fpr, tpr, thresholds = roc_curve(
+        binary_y_test,
+        probabilities[:, column],
+    )
+
+    roc_auc = auc(fpr, tpr)
+
+    plt.plot(
+        fpr,
+        tpr,
+        label=f"Class {positive_class} vs rest (AUC = {roc_auc:.3f})",
+    )
+
+plt.plot([0, 1], [0, 1], "k--", label="Random guess")
+
+plt.xlabel("False Positive Rate")
+plt.ylabel("True Positive Rate")
+plt.title("Decision tree: one-vs-rest ROC curves")
+plt.legend(loc="lower right")
+plt.tight_layout()
+
+plt.savefig(
+    SCRIPT_DIR / "task2_tree_roc.png",
     dpi=300,
     bbox_inches="tight",
 )
