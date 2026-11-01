@@ -1,0 +1,1 @@
+CategoricalNB(alpha=0.001, min_categories=[13, 10, 8, 6, 11, 3, 4])
