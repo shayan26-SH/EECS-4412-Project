@@ -43,7 +43,7 @@ clf = CategoricalNB(
 clf.fit(X_train, y_train)
 
 # Save the final trained classifier.
-model_path = SCRIPT_DIR / "task2_final_naive_bayes.pkl"
+model_path = SCRIPT_DIR / "Naive_bayes/task2_final_naive_bayes.pkl"
 
 with open(model_path, "wb") as f:
     pickle.dump(clf, f)
