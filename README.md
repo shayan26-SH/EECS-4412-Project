@@ -60,10 +60,10 @@ The script writes the component scores to the `PCA_3PCs` sheet of `217761263-217
 
 We used seven household predictors to classify households into four vehicle ownership categories: **0, 1, 2, or 3+ vehicles**. Both final models were evaluated on the same **25,060 held-out households**.
 
-The labeled, training, and test CSVs are already committed. To regenerate them, run these commands from the repository root. The cleaning script writes its output to the current directory, so run it inside `Assigment2`.
+The labeled, training, and test CSVs are already committed. To regenerate them, run these commands from the repository root. The cleaning script writes its output to the current directory, so run it inside `Assignment2`.
 
 ```bash
-cd Assingment2
+cd Assigment2
 python task2_split.py
 python task2_labelling.py
 python task2_train_test_split.py
@@ -73,9 +73,9 @@ cd ..
 To train and evaluate the final classifiers, run:
 
 ```bash
-python Assingment2/task2_full_training_set_test.py
-python Assingment2/Naive_bayes/task2_p2_2_train_final.py
-python Assingment2/Naive_bayes/task2_p2_3_test_final.py
+python Assignment2/task2_full_training_set_test.py
+python Assignment2/Naive_bayes/task2_p2_2_train_final.py
+python Assignment2/Naive_bayes/task2_p2_3_test_final.py
 ```
 
 | Final classifier | Held-out test accuracy |
@@ -90,7 +90,7 @@ The evaluation scripts generate confusion matrices and one-vs-rest ROC curves. D
 From the repository root, run:
 
 ```bash
-python Assingment2/task3_clustering.py
+python Assignment2/task3_clustering.py
 ```
 
 The script uses the same seven household predictors as Task 2. It standardizes numeric predictors, one-hot encodes `HOMEOWN` and `URBAN`, and runs k-means with `k = 3, 4, 5`. Vehicle count and the derived vehicle ownership class are excluded from the clustering inputs.
