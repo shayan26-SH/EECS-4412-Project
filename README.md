@@ -2,7 +2,7 @@
 
 ## Analysis of Household Characteristics, Vehicle Availability, and Travel Behaviour
 
-York University · Fall 2026
+York University · Fall 2026 ## Team Members: Shayan Rabiee, Dylan Smith, Hanifah Lameed
 
 ## Project Overview
 
@@ -10,11 +10,6 @@ This project uses the **2017 National Household Travel Survey (NHTS)** to invest
 
 We work with three types of records: households, vehicles, and trips. Phase 1 covers data preparation, descriptive statistics, and visualization. Phase 2 covers principal component analysis (PCA), household vehicle ownership classification, and household clustering. The broader research objectives also include regression analyses of trip duration and annual vehicle mileage.
 
-## Team Members
-
-- Shayan Rabiee
-- Dylan Smith
-- Hanifah Lameed
 
 ## Dataset
 
