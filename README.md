@@ -2,7 +2,7 @@
 
 ## Analysis of Household Characteristics, Vehicle Availability, and Travel Behaviour
 
-York University · Fall 2026 ##
+York University · Fall 2026 
 Team Members: Shayan Rabiee, Dylan Smith, Hanifah Lameed
 
 ## Project Overview
