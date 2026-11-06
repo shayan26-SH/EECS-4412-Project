@@ -83,7 +83,7 @@ python Assignment2/Naive_bayes/task2_p2_3_test_final.py
 | Decision tree (`max_depth=10`) | 68.28% |
 | Categorical Naïve Bayes (`alpha=0.1`) | 67.28% |
 
-The evaluation scripts generate confusion matrices and one-vs-rest ROC curves. Decision tree outputs are saved in `Assingment2/`, and Naïve Bayes outputs are saved in `Assingment2/Naive_bayes/`.
+The evaluation scripts generate confusion matrices and one-vs-rest ROC curves. Decision tree outputs are saved in `Assignment2/`, and Naïve Bayes outputs are saved in `Assignment2/Naive_bayes/`.
 
 ### Task 3 — Clustering Analysis
 
@@ -103,7 +103,7 @@ The script uses the same seven household predictors as Task 2. It standardizes n
 
 Five clusters produced the lowest observed SSE. In a separate held-out evaluation, the five-cluster model achieved **61.46% accuracy** after each cluster was mapped to its most frequent vehicle class in the training data. Both final Task 2 classifiers achieved higher test accuracy.
 
-The script saves SSE results, cluster assignments, cluster profiles, and a test comparison in `Assingment2/task3_results/`. The generated `test_comparison.csv` uses **Gaussian Naïve Bayes** as a baseline. The final **Categorical Naïve Bayes** result comes from the Task 2 evaluation.
+The script saves SSE results, cluster assignments, cluster profiles, and a test comparison in `Assignment2/task3_results/`. The generated `test_comparison.csv` uses **Gaussian Naïve Bayes** as a baseline. The final **Categorical Naïve Bayes** result comes from the Task 2 evaluation.
 
 ### Task 4 — Progress on Research Objectives
 
