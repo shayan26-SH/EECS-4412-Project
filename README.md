@@ -2,7 +2,8 @@
 
 ## Analysis of Household Characteristics, Vehicle Availability, and Travel Behaviour
 
-York University · Fall 2026 ## Team Members: Shayan Rabiee, Dylan Smith, Hanifah Lameed
+York University · Fall 2026 ##
+Team Members: Shayan Rabiee, Dylan Smith, Hanifah Lameed
 
 ## Project Overview
 
@@ -13,7 +14,7 @@ We work with three types of records: households, vehicles, and trips. Phase 1 co
 
 ## Dataset
 
-The **Federal Highway Administration (FHWA)** provides the 2017 NHTS. The survey records household demographics and income, vehicle ownership and characteristics, transportation modes, trip purpose, distance and duration, traveller characteristics, and day-of-week travel patterns.
+The **Federal Highway Administration (FHWA)** provides the 2017 NHTS. The survey records household demographics and income, vehicle ownership and characteristics, transportation modes, trip purpose, distance and duration, traveler characteristics, and day-of-week travel patterns.
 
 - [NHTS website](https://nhts.ornl.gov/)
 - [NHTS documentation](https://nhts.ornl.gov/documentation)
@@ -39,7 +40,7 @@ Open a terminal in the repository root and install the Python dependencies.
 python -m pip install -r requirements.txt
 ```
 
-The folder name `Assingment2` in the commands below matches the repository.
+The folder name `Assignment2` in the commands below matches the repository.
 
 ## Phase 2
 
@@ -59,7 +60,7 @@ The script writes the component scores to the `PCA_3PCs` sheet of `217761263-217
 
 We used seven household predictors to classify households into four vehicle ownership categories: **0, 1, 2, or 3+ vehicles**. Both final models were evaluated on the same **25,060 held-out households**.
 
-The labelled, training, and test CSVs are already committed. To regenerate them, run these commands from the repository root. The cleaning script writes its output to the current directory, so run it inside `Assingment2`.
+The labeled, training, and test CSVs are already committed. To regenerate them, run these commands from the repository root. The cleaning script writes its output to the current directory, so run it inside `Assingment2`.
 
 ```bash
 cd Assingment2
