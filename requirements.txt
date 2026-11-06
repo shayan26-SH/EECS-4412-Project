@@ -1,6 +1,7 @@
 pandas
+numpy
 matplotlib
+scikit-learn
 xlsxwriter
-flake8
 openpyxl
-scikit
+flake8
