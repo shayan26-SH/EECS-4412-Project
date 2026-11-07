@@ -1,8 +1,18 @@
+from pathlib import Path
+
+import matplotlib
+matplotlib.use("Agg")
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parents[1]
+OUTPUT_DIR = SCRIPT_DIR / "results"
+OUTPUT_DIR.mkdir(exist_ok=True)
 
 
 
@@ -11,7 +21,7 @@ from sklearn.decomposition import PCA
 # ============================================================
 
 trip = pd.read_csv(
-    "trippub_202609201847.csv",
+    PROJECT_DIR / "trippub_202609201847.csv",
     usecols=["HOUSEID", "TRPMILES", "TRVLCMIN", "R_AGE"],
     low_memory=False
 )
@@ -20,7 +30,7 @@ print("Trip dataset loaded successfully.")
 print("Shape:", trip.shape)
 
 household = pd.read_csv(
-    "hhpub_202609201846.csv",
+    PROJECT_DIR / "hhpub_202609201846.csv",
     usecols=["HOUSEID", "HHSIZE", "HHVEHCNT", "WRKCOUNT"],
     low_memory=False
 )
@@ -205,11 +215,11 @@ plt.title(
 plt.tight_layout()
 
 plt.savefig(
-    "Task1_PCA_Explained_Variance.png",
+    OUTPUT_DIR / "Task1_PCA_Explained_Variance.png",
     dpi=300
 )
 
-plt.show()
+plt.close()
 
 
 # ============================================================
@@ -243,20 +253,21 @@ plt.title(
 plt.tight_layout()
 
 plt.savefig(
-    "Task1_PCA_PC1_vs_PC2.png",
+    OUTPUT_DIR / "Task1_PCA_PC1_vs_PC2.png",
     dpi=300
 )
 
-plt.show()
+plt.close()
 
 
 # ============================================================
 # 10. CREATE EXCEL WORKBOOK
 # ============================================================
 
-workbook_name = (
-    "217761263-217285287-219714815.xlsx"
-)
+# Keep regenerated PCA output separate from the combined submission workbook.
+# The shared workbook also contains Classification_Data and must not be replaced
+# with this PCA-only output.
+workbook_name = OUTPUT_DIR / "task1_pca_scores.xlsx"
 
 with pd.ExcelWriter(
     workbook_name,

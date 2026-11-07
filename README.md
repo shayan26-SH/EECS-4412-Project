@@ -49,12 +49,14 @@ The folder name `Assignment2` in the commands below matches the repository.
 From the repository root, run:
 
 ```bash
-python 217761263-217285287-219714815-Task1-PCA.py
+python Assignment2/Task1/task1_pca.py
 ```
 
 The script joins trip and household records using `HOUSEID`, cleans and standardizes six numeric variables, and retains three principal components. Together, the components explain **76.66%** of the variance.
 
-The script writes the component scores to the `PCA_3PCs` sheet of `217761263-217285287-219714815.xlsx` and generates an explained-variance chart and a PC1-versus-PC2 scatter plot. Committed copies of the workbook and PCA figures are in `Part 2 figures + excel/`.
+The script and its figures are grouped in `Assignment2/Task1/`. Input paths are relative to the script, so it runs from any working directory. It saves the explained-variance chart, PC1-versus-PC2 scatter plot and a PCA-only `task1_pca_scores.xlsx` workbook in `Assignment2/Task1/results/`. Charts are saved without opening interactive windows.
+
+The combined submission workbook remains at `Part 2 figures + excel/217761263-217285287-219714815.xlsx` because it contains both Task 1 and Task 2 sheets. Running PCA does not modify that shared workbook. If the analysis changes, update only its `PCA_3PCs` sheet after verification, preserving `Classification_Data`.
 
 ### Task 2 — Classification
 
@@ -102,6 +104,8 @@ python Assignment2/Task2/Naive_bayes/task2_08_evaluate_naive_bayes.py
 | Categorical Naïve Bayes (`alpha=0.1`) | 67.28% |
 
 The evaluation scripts generate confusion matrices and one-vs-rest ROC curves. Decision tree outputs are saved in `Assignment2/Task2/`, and Naïve Bayes outputs are saved in `Assignment2/Task2/Naive_bayes/`.
+
+The submission workbook, `Part 2 figures + excel/217761263-217285287-219714815.xlsx`, contains both `PCA_3PCs` and `Classification_Data`. The classification sheet combines all 100,238 training and 25,060 test households, preserving their source row order within each split. It includes the seven predictors, `VEHICLE_CLASS`, `HOUSEID`, and a `Split` column (`Train` or `Test`), with a frozen header row and filters. Its values were checked against `Assignment2/Task2/task2_train.csv` and `task2_test.csv`; the original PCA sheet was preserved unchanged. The model scripts do not refresh this worksheet automatically. The Task 1 script writes its PCA-only workbook to `Assignment2/Task1/results/task1_pca_scores.xlsx`, leaving this combined submission workbook untouched.
 
 ### Task 3 — Clustering Analysis
 
