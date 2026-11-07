@@ -1,5 +1,11 @@
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent
+
 import os
 import pandas as pd
+import xlsxwriter
 
 
 # ============================================================
@@ -14,19 +20,23 @@ import pandas as pd
 # ============================================================
 
 household = pd.read_csv(
-    "hhpub_202609201846.csv",
+    PROJECT_DIR / "hhpub_202609201846.csv",
     low_memory=False
 )
 
 vehicle = pd.read_csv(
-    "vehpub_202609201846.csv",
+    PROJECT_DIR / "vehpub_202609201846.csv",
     low_memory=False
 )
 
 trip = pd.read_csv(
-    "trippub_202609201847.csv",
+    PROJECT_DIR / "trippub_202609201847.csv",
     low_memory=False
 )
+
+household_columns = household.columns.tolist()
+vehicle_columns = vehicle.columns.tolist()
+trip_columns = trip.columns.tolist()
 
 
 print("======================================")
@@ -415,8 +425,8 @@ task6_data.columns = [
 # CREATE TASK 6 CSV FILE
 # ============================================================
 
-csv_filename = (
-    "Shayan-Rabiee-Dylan-Smith-Hanifah-Lameed--T1.csv"
+csv_filename = SCRIPT_DIR / (
+    "217761263-217285287-219714815-T1.csv"
 )
 
 task6_data.to_csv(
@@ -427,43 +437,121 @@ task6_data.to_csv(
 print("\nCSV file successfully created:")
 print(csv_filename)
 
+
 # ============================================================
-# FINAL SUMMARY
+# CREATE TASK 7 EXCEL WORKBOOK
 # ============================================================
 
 print("\n======================================")
-print("TASK 6 SUMMARY")
+print("CREATING TASK 7 EXCEL WORKBOOK")
 print("======================================")
 
-print("\nNOMINAL - TRPTRANS")
-print("Mode:", transport_mode)
-
-print("\nORDINAL - HHFAMINC")
-print(
-    "Median:",
-    income_labels.get(int(income_median))
-)
-print(
-    "Mode:",
-    income_labels.get(int(income_mode))
+workbook_name = "217761263-217285287-219714815.xlsx"
+workbook_path = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    workbook_name
 )
 
-print("\nINTERVAL - TDAYDATE")
-print(
-    f"Mean date: {mean_year}-{mean_month:02d}"
-)
-print(
-    f"Standard deviation: {date_std:.2f} months"
+def write_sheet(workbook, sheet_name, dataframe):
+    worksheet = workbook.add_worksheet(sheet_name)
+    worksheet.write_row(0, 0, dataframe.columns.tolist())
+
+    for row_number, row in enumerate(
+        dataframe.itertuples(index=False, name=None),
+        start=1
+    ):
+        worksheet.write_row(
+            row_number,
+            0,
+            [
+                value.item() if hasattr(value, "item") else value
+                for value in row
+            ]
+        )
+
+
+workbook = xlsxwriter.Workbook(
+    workbook_path,
+    {
+        "constant_memory": True,
+        "strings_to_formulas": False,
+        "strings_to_urls": False
+    }
 )
 
-print("\nRATIO - TRPMILES")
-print(
-    f"Mean: {trip_mean:.2f} miles"
-)
-print(
-    f"Median: {trip_median:.2f} miles"
-)
+try:
+    # --------------------------------------------------------
+    # SHEET 1: HOUSEHOLD
+    # Complete household dataset
+    # --------------------------------------------------------
+    write_sheet(workbook, "Household", household[household_columns])
+
+    # --------------------------------------------------------
+    # SHEET 2: VEHICLE
+    # Complete vehicle dataset
+    # --------------------------------------------------------
+    write_sheet(workbook, "Vehicle", vehicle[vehicle_columns])
+
+    # --------------------------------------------------------
+    # SHEET 3: TRIP
+    # Complete trip dataset
+    # --------------------------------------------------------
+    write_sheet(workbook, "Trip", trip[trip_columns])
+
+    # --------------------------------------------------------
+    # SHEET 4: TRPTRANS
+    # Nominal dimension
+    # --------------------------------------------------------
+    trptrans_sheet = pd.DataFrame({
+        "TRPTRANS": trip_transport["TRPTRANS_NUM"],
+        "Transportation_Mode":
+            trip_transport["Transportation_Mode"]
+    })
+
+    write_sheet(workbook, "TRPTRANS", trptrans_sheet)
+
+    # --------------------------------------------------------
+    # SHEET 5: HHFAMINC
+    # Ordinal dimension
+    # --------------------------------------------------------
+    hhfaminc_sheet = pd.DataFrame({
+        "HHFAMINC": income,
+        "Income_Category": income.map(income_labels)
+    })
+
+    write_sheet(workbook, "HHFAMINC", hhfaminc_sheet)
+
+    # --------------------------------------------------------
+    # SHEET 6: TDAYDATE
+    # Interval dimension
+    # --------------------------------------------------------
+    tdaydate_sheet = pd.DataFrame({
+        "TDAYDATE": (
+            travel_year.astype(str) +
+            travel_month.astype(str).str.zfill(2)
+        ),
+        "Month_Index": month_index
+    })
+
+    write_sheet(workbook, "TDAYDATE", tdaydate_sheet)
+
+    # --------------------------------------------------------
+    # SHEET 7: TRPMILES
+    # Ratio dimension
+    # --------------------------------------------------------
+    trpmiles_sheet = pd.DataFrame({
+        "TRPMILES": trip_miles
+    })
+
+    write_sheet(workbook, "TRPMILES", trpmiles_sheet)
+finally:
+    workbook.close()
+
+
+print("\nExcel workbook successfully created:")
+print(workbook_path)
 
 print("\n======================================")
 print("TASK 6 COMPLETE")
 print("======================================")
+

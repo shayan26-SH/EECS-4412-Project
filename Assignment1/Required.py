@@ -1,3 +1,8 @@
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent
+
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -15,17 +20,17 @@ import matplotlib.pyplot as plt
 # ============================================================
 
 household = pd.read_csv(
-    "hhpub_202609201846.csv",
+    PROJECT_DIR / "hhpub_202609201846.csv",
     low_memory=False
 )
 
 vehicle = pd.read_csv(
-    "vehpub_202609201846.csv",
+    PROJECT_DIR / "vehpub_202609201846.csv",
     low_memory=False
 )
 
 trip = pd.read_csv(
-    "trippub_202609201847.csv",
+    PROJECT_DIR / "trippub_202609201847.csv",
     low_memory=False
 )
 
@@ -52,7 +57,7 @@ print(
 # 2. CREATE FOLDER FOR SAVED GRAPHS
 # ============================================================
 
-output_folder = "Task4_Visualizations"
+output_folder = SCRIPT_DIR / "217761263-217285287-219714815-Visualizations"
 
 os.makedirs(output_folder, exist_ok=True)
 

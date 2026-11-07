@@ -1,9 +1,14 @@
+from pathlib import Path
+
+SCRIPT_DIR = Path(__file__).resolve().parent
+PROJECT_DIR = SCRIPT_DIR.parent
+
 import pandas as pd  # type: ignore[import-not-found]
 
 # Load the three NHTS files you are using
-household = pd.read_csv("hhpub_202609201846.csv", low_memory=False)
-vehicle = pd.read_csv("vehpub_202609201846.csv", low_memory=False)
-trip = pd.read_csv("trippub_202609201847.csv", low_memory=False)
+household = pd.read_csv(PROJECT_DIR / "hhpub_202609201846.csv", low_memory=False)
+vehicle = pd.read_csv(PROJECT_DIR / "vehpub_202609201846.csv", low_memory=False)
+trip = pd.read_csv(PROJECT_DIR / "trippub_202609201847.csv", low_memory=False)
 
 # Print dataset sizes
 print("===== DATASET SUMMARY =====")
