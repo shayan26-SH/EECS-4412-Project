@@ -2,7 +2,7 @@ from pathlib import Path
 import pandas as pd
 ## count of 129696
 # Locate the dataset relative to this script.
-PROJECT_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = PROJECT_DIR / "hhpub_202609201846.csv"
 
 PREDICTORS = [

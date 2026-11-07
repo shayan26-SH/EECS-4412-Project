@@ -3,7 +3,7 @@ import pandas as pd
 ## households removed: 4398
 ## Households remaining: 125298
 
-PROJECT_DIR = Path(__file__).resolve().parent.parent
+PROJECT_DIR = Path(__file__).resolve().parents[2]
 DATA_PATH = PROJECT_DIR / "hhpub_202609201846.csv"
 
 # Documented missing codes, including the apostrophe-prefixed
@@ -42,4 +42,4 @@ print("Households removed:", rows_before - len(data))
 print("Households remaining:", len(data))
 
 # save the data to a new csv file
-data.to_csv("task2_split_data.csv", index=False)
+data.to_csv(Path(__file__).resolve().parent / "task2_split_data.csv", index=False)

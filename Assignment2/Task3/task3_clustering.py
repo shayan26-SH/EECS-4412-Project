@@ -22,7 +22,8 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 BASE = Path(__file__).resolve().parent
-OUTPUT = BASE / "task3_results"
+DATA_DIR = BASE.parent / "Task2"
+OUTPUT = BASE / "results"
 OUTPUT.mkdir(exist_ok=True)
 
 NUMERIC = [
@@ -40,12 +41,12 @@ FEATURES = NUMERIC + CATEGORICAL
 # ---------- Load the existing Task 2 data ----------
 
 train = pd.read_csv(
-    BASE / "task2_train.csv",
+    DATA_DIR / "task2_train.csv",
     dtype={"HOUSEID": str, "VEHICLE_CLASS": str},
 )
 
 test = pd.read_csv(
-    BASE / "task2_test.csv",
+    DATA_DIR / "task2_test.csv",
     dtype={"HOUSEID": str, "VEHICLE_CLASS": str},
 )
 
