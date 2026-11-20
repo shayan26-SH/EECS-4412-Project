@@ -1,0 +1,6 @@
+items,size,support,count
+drivers=2+ | urban=urban_area,2,0.38433609958506226,48165
+drivers=2+ | size=2,2,0.36630226619853173,45905
+drivers=2+ | vehicles=2,2,0.3211618257261411,40248
+drivers=1 | size=1,2,0.2917650813916374,36564
+drivers=2+ | workers=2+,2,0.28969039259495694,36304

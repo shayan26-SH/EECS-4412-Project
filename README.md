@@ -151,3 +151,84 @@ The script saves SSE results, cluster assignments, cluster profiles, and a test 
 ### Task 4 — Progress on Research Objectives
 
 The Phase 2 report reviews progress on the five original questions about transportation mode, trip duration, annual vehicle mileage, household vehicle ownership, and household travel-day profiles. Classification directly addresses household vehicle ownership. We revised the fifth question to ask whether the selected household characteristics form interpretable groups and how closely those groups align with vehicle ownership classes.
+
+## Phase 3 — Task 1: Association Analysis
+
+### Objective
+
+Identify frequently occurring combinations of household characteristics and examine the association rules derived from them.
+
+**Research question:** Which combinations of household size, driver count, worker count, income category, urban classification, and vehicle ownership occur most frequently, and which association rules have the highest and lowest confidence?
+
+### Dataset and Preprocessing
+
+The analysis uses `hhpub_202609201846.csv`. Each household forms one transaction.
+
+The script removes records with missing or invalid values, preserves legitimate zeros, and converts numeric attributes into categorical items.
+
+| Attribute | Transaction categories |
+|---|---|
+| Household size | 1, 2, 3+ members |
+| Driver count | 0, 1, 2+ drivers |
+| Worker count | 0, 1, 2+ workers |
+| Household income | Below $50,000; $50,000–$99,999; $100,000+ |
+| Vehicle count | 0, 1, 2, 3+ vehicles |
+| Urban classification | Four original NHTS categories |
+
+`HOUSEID` is retained for identifying records and excluded from the mining inputs.
+
+### Method
+
+The script uses **FP-Growth** to find the five most frequent itemsets containing at least two items. Support is the proportion of retained households containing every item in an itemset.
+
+It generates all association rules from these five itemsets and selects four distinct rules: two with the highest confidence and two with the lowest confidence. Ties are resolved using support and alphabetical ordering.
+
+For the two highest-confidence rules, the script calculates five interest measures:
+
+- Lift
+- Leverage
+- Conviction
+- Cosine
+- Jaccard
+
+The selected measures should be checked against the measures covered in Module 005.
+
+### Installation and Execution
+
+Install the required packages:
+
+```bash
+python -m pip install pandas numpy mlxtend
+```
+
+From the repository root, run:
+
+```bash
+python Assingment3/task1_association.py
+```
+
+The expected folder structure is:
+
+```text
+EECS-4412-Project/
+├── hhpub_202609201846.csv
+└── Assingment3/
+    └── task1_association.py
+```
+
+### Output Files
+
+Results are saved in `Assingment3/task1_results/`.
+
+| File | Contents |
+|---|---|
+| `raw_households.csv` | Selected household attributes before cleaning |
+| `processed_households.csv` | Cleaned and categorized household transactions |
+| `top_five_itemsets.csv` | Five most frequent itemsets, their sizes, support, and counts |
+| `all_candidate_rules.csv` | All rules generated from the selected itemsets |
+| `four_selected_rules.csv` | Two highest- and two lowest-confidence rules |
+| `top_two_rules_interest_measures.csv` | Five interest measures for the two highest-confidence rules |
+
+Support and confidence are saved as proportions. Multiply by 100 to express them as percentages.
+
+The analysis uses unweighted household records, so the results describe the retained sample. Association rules describe co-occurrence and do not establish causation.
