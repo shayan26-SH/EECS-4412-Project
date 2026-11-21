@@ -1,0 +1,3 @@
+pattern,person_count,support
+non_home_based -> non_home_based,79443,0.3624786691366362
+non_home_based -> home_based_shopping,68670,0.313324146993603

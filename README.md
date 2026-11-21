@@ -233,3 +233,107 @@ Results are saved in `Assingment3/Task1-Association/task1_results/`.
 Support and confidence are saved as proportions. Multiply by 100 to express them as percentages.
 
 The analysis uses unweighted household records, so the results describe the retained sample. Association rules describe co-occurrence and do not establish causation.
+
+## Phase 3 — Task 2: Sequential Analysis
+
+### Objective
+
+Identify frequent ordered patterns of trip purposes within a person’s travel day and derive sequential rules from those patterns.
+
+**Research question:** What are the two most frequent ordered trip-purpose patterns, and which rules derived from them have the highest confidence?
+
+### Dataset
+
+The analysis uses `trippub_202609201847.csv`.
+
+| Field | Purpose |
+|---|---|
+| `HOUSEID` | Identifies the household |
+| `PERSONID` | Identifies a person within the household |
+| `TDTRPNUM` | Determines trip order |
+| `TRIPPURP` | Describes the generalized trip purpose |
+
+The Trip table provides individual travel events and their order. Trips are grouped by `HOUSEID` and `PERSONID` to construct one sequence per person.
+
+### Preprocessing
+
+The script performs the following steps:
+
+1. Converts trip numbers to numeric values.
+2. Removes whitespace and leading apostrophes from trip-purpose codes and converts them to uppercase.
+3. Excludes records with missing household or person identifiers.
+4. Removes entire person sequences containing invalid trip numbers or unrecognized purpose codes.
+5. Checks for duplicate trip positions within each person’s sequence.
+6. Sorts trips by trip number and constructs ordered purpose sequences.
+
+The following purpose codes are retained:
+
+| Code | Description |
+|---|---|
+| `HBW` | Home-based work |
+| `HBSHOP` | Home-based shopping |
+| `HBSOCREC` | Home-based social or recreational |
+| `HBO` | Home-based other |
+| `NHB` | Non-home-based |
+
+### Method
+
+The script uses **PrefixSpan** to find the two most frequent sequential patterns containing at least two events.
+
+Patterns preserve order and allow intervening trips. For example, `A → C` occurs within `A → B → C`.
+
+Support is calculated as:
+
+```text
+Support = People containing the pattern / Total people analysed
+```
+
+Each person contributes at most one count to a pattern’s support, regardless of how many times the pattern appears in their sequence. People with a single valid trip remain in the support denominator.
+
+The script splits each selected pattern into an antecedent prefix and a consequent suffix, then selects the two highest-confidence candidate rules.
+
+```text
+Confidence = People containing the complete ordered pattern
+             / People containing the antecedent
+```
+
+### Installation
+
+```bash
+python -m pip install pandas prefixspan
+```
+
+### Folder Structure and Execution
+
+With `ROOT = BASE.parent.parent`, use this structure:
+
+```text
+EECS-4412-Project/
+├── trippub_202609201847.csv
+└── Assingment3/
+    └── Task2/
+        └── task2_sequential.py
+```
+
+From the repository root, run:
+
+```bash
+python Assingment3/Task2/task2_sequential.py
+```
+
+### Output Files
+
+Results are saved in `Assingment3/Task2/task2_results/`.
+
+| File | Contents |
+|---|---|
+| `raw_trips.csv` | Selected trip fields before preprocessing |
+| `processed_trip_events.csv` | Retained trip events and readable purpose labels |
+| `person_sequences.csv` | Ordered trip-purpose sequence for each person |
+| `top_two_sequential_patterns.csv` | Two most frequent patterns, person counts, and support |
+| `candidate_sequential_rules.csv` | Rules derived from the two selected patterns |
+| `top_two_sequential_rules.csv` | Two highest-confidence candidate rules |
+
+Support and confidence are stored as proportions. Multiply by 100 to express them as percentages.
+
+The results describe unweighted person sequences from the retained sample and patterns within a recorded travel day.
