@@ -204,7 +204,7 @@ python -m pip install pandas numpy mlxtend
 From the repository root, run:
 
 ```bash
-python Assingment3/task1_association.py
+python Assingment3/Task1-Association/task1_association.py
 ```
 
 The expected folder structure is:
@@ -213,12 +213,13 @@ The expected folder structure is:
 EECS-4412-Project/
 ├── hhpub_202609201846.csv
 └── Assingment3/
-    └── task1_association.py
+    └── Task1-Association/
+        └── task1_association.py
 ```
 
 ### Output Files
 
-Results are saved in `Assingment3/task1_results/`.
+Results are saved in `Assingment3/Task1-Association/task1_results/`.
 
 | File | Contents |
 |---|---|
