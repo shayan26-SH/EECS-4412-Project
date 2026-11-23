@@ -81,7 +81,7 @@ The combined submission workbook remains at `Assignment2/Submission/217761263-21
 
 We used seven household predictors to classify households into four vehicle ownership categories: **0, 1, 2, or 3+ vehicles**. Both final models were evaluated on the same **25,060 held-out households**.
 
-The labeled, training, and test CSVs are already committed. To regenerate them, run these commands from the repository root. All Task 2 paths are resolved relative to the scripts, including the cleaned CSV output.
+The labelled, training, and test CSVs are already committed. To regenerate them, run these commands from the repository root. All Task 2 paths are resolved relative to the scripts, including the cleaned CSV output.
 
 ```bash
 python Assignment2/Task2/task2_01_clean_data.py
