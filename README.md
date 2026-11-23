@@ -337,4 +337,6 @@ Results are saved in `Assingment3/Task2/task2_results/`.
 Support and confidence are stored as proportions. Multiply by 100 to express them as percentages.
 
 The results describe unweighted person sequences from the retained sample and patterns within a recorded travel day.
+
+
 To visit the WikiPage => [View Project Wiki](../../wiki)
