@@ -1,3 +1,5 @@
+<div align="center">
+
 # EECS 4412 Data Mining Project
 
 ## Analysis of Household Characteristics, Vehicle Availability, and Travel Behaviour
@@ -5,12 +7,29 @@
 York University · Fall 2026 
 Team Members: Shayan Rabiee, Dylan Smith, Hanifah Lameed
 
+</div>
+
+<p align="center">
+  <a href="#project-overview">Project Overview</a> &nbsp;·&nbsp;
+  <a href="#dataset">Dataset</a> &nbsp;·&nbsp;
+  <a href="#setup">Setup</a> &nbsp;·&nbsp;
+  <a href="#phase-1">Phase 1</a> &nbsp;·&nbsp;
+  <a href="#phase-2">Phase 2</a> &nbsp;·&nbsp;
+  <a href="#phase-3--task-1-association-analysis">Association Analysis</a> &nbsp;·&nbsp;
+  <a href="#phase-3--task-2-sequential-analysis">Sequential Analysis</a>
+</p>
+
+---
+
 ## Project Overview
 
 This project uses the **2017 National Household Travel Survey (NHTS)** to investigate how household characteristics, vehicle ownership and usage, and daily travel behaviour relate to one another.
 
 We work with three types of records: households, vehicles, and trips. Phase 1 covers data preparation, descriptive statistics, and visualization. Phase 2 covers principal component analysis (PCA), household vehicle ownership classification, and household clustering. The broader research objectives also include regression analyses of trip duration and annual vehicle mileage.
 
+
+
+---
 
 ## Dataset
 
@@ -32,6 +51,9 @@ The source CSVs are stored in the repository root.
 | `vehpub_202609201846.csv` | Vehicles |
 | `trippub_202609201847.csv` | Trips |
 
+
+---
+
 ## Setup
 
 Open a terminal in the repository root and install the Python dependencies.
@@ -41,6 +63,9 @@ python -m pip install -r requirements.txt
 ```
 
 The folder name `Assignment2` in the commands below matches the repository.
+
+
+---
 
 ## Phase 1
 
@@ -60,6 +85,9 @@ python Assignment1/Task6.py
 - `217761263-217285287-219714815-Task6.py` additionally exports the seven-sheet Phase 1 workbook. Run it with `python Assignment1/217761263-217285287-219714815-Task6.py`; its CSV and workbook stay inside `Assignment1/`.
 
 All Phase 1 scripts resolve source and output paths relative to their file location. The Phase 1 workbook is separate from the combined Phase 2 submission workbook.
+
+
+---
 
 ## Phase 2
 
@@ -152,6 +180,9 @@ The script saves SSE results, cluster assignments, cluster profiles, and a test 
 
 The Phase 2 report reviews progress on the five original questions about transportation mode, trip duration, annual vehicle mileage, household vehicle ownership, and household travel-day profiles. Classification directly addresses household vehicle ownership. We revised the fifth question to ask whether the selected household characteristics form interpretable groups and how closely those groups align with vehicle ownership classes.
 
+
+---
+
 ## Phase 3 — Task 1: Association Analysis
 
 ### Objective
@@ -233,6 +264,9 @@ Results are saved in `Assingment3/Task1-Association/task1_results/`.
 Support and confidence are saved as proportions. Multiply by 100 to express them as percentages.
 
 The analysis uses unweighted household records, so the results describe the retained sample. Association rules describe co-occurrence and do not establish causation.
+
+
+---
 
 ## Phase 3 — Task 2: Sequential Analysis
 
